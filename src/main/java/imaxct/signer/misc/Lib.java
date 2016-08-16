@@ -81,10 +81,11 @@ public class Lib {
         try {
             URL requestUrl = new URL(url);
             httpURLConnection = (HttpURLConnection) requestUrl.openConnection();
-            httpURLConnection.setRequestProperty("User-Agent", userAgent);
-            httpURLConnection.setRequestProperty("Cookie", cookie);
+            if (userAgent != null)
+                httpURLConnection.setRequestProperty("User-Agent", userAgent);
+            if (cookie != null)
+                httpURLConnection.setRequestProperty("Cookie", cookie);
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestProperty("Referer", "http://tieba.baidu.com/");
             if (prop != null)
                 for (String key : prop.keySet())
                     httpURLConnection.setRequestProperty(key, prop.get(key));
@@ -110,10 +111,11 @@ public class Lib {
         try{
             URL requestUrl = new URL(url);
             httpURLConnection = (HttpURLConnection) requestUrl.openConnection();
-            httpURLConnection.setRequestProperty("User-Agent", userAgent);
-            httpURLConnection.setRequestProperty("Cookie", cookie);
+            if (userAgent != null)
+                httpURLConnection.setRequestProperty("User-Agent", userAgent);
+            if (cookie != null)
+                httpURLConnection.setRequestProperty("Cookie", cookie);
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestProperty("Referer", "http://tieba.baidu.com/");
             if (prop != null)
                 for (String key : prop.keySet())
                     httpURLConnection.setRequestProperty(key, prop.get(key));

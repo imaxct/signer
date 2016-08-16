@@ -12,5 +12,5 @@ public class Reference {
     public static final String USERAGENT_WEB = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gec" +
             "ko) Chrome/52.0.2743.116 Safari/537.36";
 
-    public static final String TEST_BDUSS = "ZrMDVtcmFSb3p6bmZXMXFQSWt5RkJ6Z1k4SnM4LXlrN2JvRk12UW9laWJ-ZE5YQVFBQUFBJCQAAAAAAAAAAAEAAAB7rqcxX01heF9DVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJtwrFebcKxXSG";
+    public static final String TEST_BDUSS = "";
 }

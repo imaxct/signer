@@ -9,8 +9,6 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Functions of Tieba
@@ -23,12 +21,12 @@ public class TiebaFunction {
 
         String tbs = getTbs(tieba.getAccount());
         SignParams params = new SignParams(tieba.getAccount().getCookie(), tbs,
-                tieba.getFid(), Lib.urlEncode(tieba.getName()));
-        Map<String, String> prop = new TreeMap<String, String>();
-        prop.put("net", "3");
-        prop.put("cuid", params.getCuid());
+                tieba.getFid(), tieba.getName());
+        //Map<String, String> prop = new TreeMap<String, String>();
+        //prop.put("net", "3");
+        //prop.put("cuid", params.getCuid());
         InputStream inputStream = Lib.postStream("http://c.tieba.baidu.com/c/c/forum/sign",
-                params.toString(), "BDUSS=" + tieba.getAccount().getCookie(), Reference.USERAGENT_CLIENT, 0, prop);
+                params.toString(), "BDUSS=" + tieba.getAccount().getCookie(), Reference.USERAGENT_CLIENT, 0, null);
         String res = Lib.streamToString(inputStream);
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
