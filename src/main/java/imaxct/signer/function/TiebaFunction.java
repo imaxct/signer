@@ -15,16 +15,13 @@ import java.io.InputStream;
  * Created by maxct on 2016/8/11.
  */
 public class TiebaFunction {
-    public static Logger logger = Logger.getLogger(TiebaFunction.class);
+    private static Logger logger = Logger.getLogger(TiebaFunction.class);
 
     public int sign(Tieba tieba){
 
         String tbs = getTbs(tieba.getAccount());
         SignParams params = new SignParams(tieba.getAccount().getCookie(), tbs,
                 tieba.getFid(), tieba.getName());
-        //Map<String, String> prop = new TreeMap<String, String>();
-        //prop.put("net", "3");
-        //prop.put("cuid", params.getCuid());
         InputStream inputStream = Lib.postStream("http://c.tieba.baidu.com/c/c/forum/sign",
                 params.toString(), "BDUSS=" + tieba.getAccount().getCookie(), Reference.USERAGENT_CLIENT, 0, null);
         String res = Lib.streamToString(inputStream);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">
+            jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8
+        </property>
+        <property name="connection.username">rooter</property>
+        <property name="connection.password">APassword123!</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="connection.provider_class">
+            org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+        </property>
+        <property name="current_session_context_class">thread</property>
+
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.timeout">5000</property>
+        <property name="hibernate.c3p0.max_statements">100</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="imaxct.signer.domain.Account" />
+        <mapping class="imaxct.signer.domain.Tieba" />
+        <mapping class="imaxct.signer.domain.User" />
+    </session-factory>
+</hibernate-configuration>

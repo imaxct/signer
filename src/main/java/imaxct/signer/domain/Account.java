@@ -2,8 +2,7 @@ package imaxct.signer.domain;
 
 import imaxct.signer.misc.Reference;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,19 +12,22 @@ import java.io.Serializable;
 @Entity
 @Table(name = Reference.DB_PREFIX + "_account")
 public class Account implements Serializable{
-    private int id;
+    private int uid;
     private String name;
     private String cookie;
     private String openUid;
     private User userId;
     public Account(){}
 
-    public int getId() {
-        return id;
+    @Id
+    @Column(length = 30)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getName() {

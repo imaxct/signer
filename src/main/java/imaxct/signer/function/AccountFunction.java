@@ -18,9 +18,8 @@ import java.util.List;
  */
 public class AccountFunction {
 
-    public static Logger logger = Logger.getLogger(AccountFunction.class);
+    private static Logger logger = Logger.getLogger(AccountFunction.class);
 
-    String userIdPattern = "([\\d]{5,})";
     public Account getAccountInfo(Account account){
         InputStream inputStream = Lib.getStream("http://tieba.baidu.com/f/user/json_userinfo",
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
@@ -41,7 +40,7 @@ public class AccountFunction {
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
             if (object.getInt("no")==0){
-                account.setId(object.getJSONObject("data").getInt("id"));
+                account.setUid(object.getJSONObject("data").getInt("id"));
             }else{
                 logger.error("get user info error, " + object.getString("error"));
             }
@@ -50,8 +49,8 @@ public class AccountFunction {
     }
 
     public List<Tieba> getLikedTieba(Account account){
-        List<Tieba>list = new ArrayList<Tieba>();
-        InputStream inputStream = Lib.getStream("http://tieba.baidu.com/p/getLikeForum?uid=" + account.getId(),
+        List<Tieba>list = new ArrayList<>();
+        InputStream inputStream = Lib.getStream("http://tieba.baidu.com/p/getLikeForum?uid=" + account.getUid(),
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
         String res = Lib.streamToString(inputStream);
         if (res!=null){

@@ -16,9 +16,17 @@ import java.util.Set;
  */
 public class Lib {
 
-    public static Logger logger = Logger.getLogger(Lib.class);
+    private static Logger logger = Logger.getLogger(Lib.class);
 
-    static final String BASE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
+    private static final String BASE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
+
+    public static String generatePassword(String pass){
+        StringBuilder res = new StringBuilder(md5(pass));
+        res.append(Reference.SALT);
+        res = new StringBuilder(res.toString().substring(0, 30)).reverse();
+        return res.toString();
+    }
+
     public static String rand(int len){
         StringBuilder s = new StringBuilder();
         for (int i=0; i<len; ++i)
@@ -27,7 +35,7 @@ public class Lib {
     }
 
     public static String urlEncode(String str){
-        String res = null;
+        String res;
         try {
             res = URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -47,9 +55,9 @@ public class Lib {
             int len = md.length;
             char s[] = new char[len * 2];
             int k = 0;
-            for (int i=0; i<len; ++i){
-                s[k++] = hex[md[i] >>> 4 & 0xf];
-                s[k++] = hex[md[i] & 0xf];
+            for (byte aMd : md) {
+                s[k++] = hex[aMd >>> 4 & 0xf];
+                s[k++] = hex[aMd & 0xf];
             }
             return new String(s);
         }catch (Exception e){
@@ -61,7 +69,7 @@ public class Lib {
     public static String streamToString(InputStream stream){
         if (stream == null)
             return null;
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         String buff;
         BufferedReader in = new BufferedReader(new InputStreamReader(stream));
         try{
@@ -77,7 +85,7 @@ public class Lib {
     public static InputStream getStream(String url, String cookie, String userAgent,
                                         int timeout, Map<String, String>prop){
         InputStream inputStream = null;
-        HttpURLConnection httpURLConnection = null;
+        HttpURLConnection httpURLConnection;
         try {
             URL requestUrl = new URL(url);
             httpURLConnection = (HttpURLConnection) requestUrl.openConnection();
@@ -107,7 +115,7 @@ public class Lib {
     public static InputStream postStream(String url, String params, String cookie,
                                          String userAgent, int timeout, Map<String, String>prop){
         InputStream inputStream = null;
-        HttpURLConnection httpURLConnection = null;
+        HttpURLConnection httpURLConnection;
         try{
             URL requestUrl = new URL(url);
             httpURLConnection = (HttpURLConnection) requestUrl.openConnection();
@@ -145,7 +153,7 @@ public class Lib {
             return null;
         Set<String>set = map.keySet();
         for (String key : set){
-            sb.append(key + "=" + map.get(key) + "; ");
+            sb.append(key).append("=").append(map.get(key)).append("; ");
         }
         return sb.toString().trim();
     }

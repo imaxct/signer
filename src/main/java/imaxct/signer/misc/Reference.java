@@ -13,4 +13,6 @@ public class Reference {
             "ko) Chrome/52.0.2743.116 Safari/537.36";
 
     public static final String TEST_BDUSS = "";
+
+    public static final String SALT = "CSr63ig6EeBku4XAqNt3Qv2xL3EeS6sz";
 }

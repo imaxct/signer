@@ -2,8 +2,7 @@ package imaxct.signer.domain;
 
 import imaxct.signer.misc.Reference;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -16,8 +15,12 @@ public class User implements Serializable{
     private int id;
     private String username;
     private String password;
+    private int role;
     public User(){}
 
+    @Id
+    @Column(length = 30)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -26,6 +29,7 @@ public class User implements Serializable{
         this.id = id;
     }
 
+    @Column(length = 30, unique = true, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -34,11 +38,21 @@ public class User implements Serializable{
         this.username = username;
     }
 
+    @Column(length = 30, nullable = false)
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Column(length = 10, nullable = false)
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
