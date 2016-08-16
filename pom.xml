@@ -8,7 +8,7 @@
     <name>signer Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <properties>
-        <hibernate.version>4.1.4.Final</hibernate.version>
+        <hibernate.version>4.2.3.Final</hibernate.version>
     </properties>
     <dependencies>
         <dependency>
@@ -83,8 +83,7 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://i.sdumail.com:8080/manager/text</url>
-                    <username>tomcat-script</username>
-                    <password>WhsYurDddy</password>
+                    <server>cloudAccount</server>
                     <uriEncoding>UTF-8</uriEncoding>
                     <update>true</update>
                     <path>/${build.finalName}</path>
