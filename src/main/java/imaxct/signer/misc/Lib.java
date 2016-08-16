@@ -30,7 +30,7 @@ public class Lib {
     public static String rand(int len){
         StringBuilder s = new StringBuilder();
         for (int i=0; i<len; ++i)
-            s.append(BASE.charAt((int)(Math.random() * 1000) % 62));
+            s.append(BASE.charAt((int)(Math.random() * 23456789) % 62));
         return s.toString();
     }
 
