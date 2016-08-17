@@ -18,7 +18,7 @@ public class Index {
     @RequestMapping(value = "/Index", method = RequestMethod.GET)
     public ModelAndView Index(ModelMap map){
         if (!map.containsAttribute("user")) {
-            ErrorMsg msg = new ErrorMsg("Error", "还没有登录,即将跳转到登录页面.", true, "/index.jsp");
+            ErrorMsg msg = new ErrorMsg("Error", "还没有登录,即将跳转到登录页面.", true, "index.jsp");
             ModelAndView modelAndView = new ModelAndView("error");
             modelAndView.addObject("map", msg.getMap());
             return modelAndView;

@@ -25,6 +25,30 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">no</prop>
+                        <prop key="kaptcha.session.key">vcode</prop>
+                        <prop key="kaptcha.image.width">85</prop>
+                        <prop key="kaptcha.image.height">35</prop>
+                        <prop key="kaptcha.textproducer.font.size">25</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.textproducer.font.names">Arial</prop>
+                        <prop key="kaptcha.obscurificator.impl">
+                            com.google.code.kaptcha.impl.ShadowGimpy
+                        </prop>
+                        <prop key="kaptcha.noise.impl">
+                            com.google.code.kaptcha.impl.NoNoise
+                        </prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
     <task:annotation-driven/>
     <context:component-scan base-package="imaxct.signer.task"/>
 
