@@ -11,12 +11,14 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = Reference.DB_PREFIX + "_user")
-public class User implements Serializable{
+public class User implements Serializable {
     private int id;
     private String username;
     private String password;
     private int role;
-    public User(){}
+
+    public User() {
+    }
 
     @Id
     @Column(length = 30)
@@ -54,5 +56,29 @@ public class User implements Serializable{
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        User user = (User) obj;
+        return user.getId()==id;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hash = 1;
+        hash = hash * prime + id;
+        hash = hash * prime + username.hashCode();
+        hash = hash * prime + password.hashCode();
+        hash = hash * prime + role;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "User[id=" + id + ", username=" + username + ", role=" + role + "]";
     }
 }

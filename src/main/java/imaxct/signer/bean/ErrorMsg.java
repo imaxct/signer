@@ -1,46 +1,28 @@
 package imaxct.signer.bean;
 
+import org.apache.commons.collections.map.HashedMap;
+
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Error msg for ModelAndView
  * Created by maxct on 2016/8/16.
  */
 public class ErrorMsg implements Serializable {
-    private String title;
-    private String errmsg;
-    private boolean redirect;
-    private String url;
-
+    private Map<String, Object>map = new HashedMap();
     public ErrorMsg() {
     }
 
-    public ErrorMsg(String title, String errmsg) {
-        this.title = title;
-        this.errmsg = errmsg;
-    }
-
     public ErrorMsg(String title, String errmsg, boolean redirect, String url) {
-        this.title = title;
-        this.errmsg = errmsg;
-        this.redirect = redirect;
-        this.url = url;
+        map.put("title", title);
+        map.put("errmsg", errmsg);
+        map.put("redirect", redirect);
+        map.put("url", url);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getErrmsg() {
-        return errmsg;
-    }
-
-    public boolean isRedirect() {
-        return redirect;
-    }
-
-    public String getUrl() {
-        return url;
+    public Map<String, Object> getMap(){
+        return map;
     }
 
 }

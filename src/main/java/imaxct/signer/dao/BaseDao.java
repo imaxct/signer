@@ -1,6 +1,8 @@
 package imaxct.signer.dao;
 
 import imaxct.signer.misc.SessionUtil;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -86,5 +88,113 @@ public class BaseDao<T> {
             session.getTransaction().commit();
         }
     }
-    //TODO
+
+    @SuppressWarnings("unchecked")
+    public List<T> listSql(Class<? extends T>clazz, String sql, int start, int pageListNum){
+        Session session = SessionUtil.getSession();
+        try{
+            session.beginTransaction();
+            return session.createSQLQuery(sql)
+                    .addEntity(clazz)
+                    .setFirstResult(start)
+                    .setMaxResults(pageListNum)
+                    .list();
+        }finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> listHql(String hql) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            return session.createQuery(hql).list();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> listHql(String hql, Object... objects){
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(hql);
+            if (objects != null)
+                for (int i=0; i<objects.length; ++i)
+                    query.setParameter(i, objects[i]);
+            return query.list();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> listHql(String hql, int start, int pageListNum) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            return session.createQuery(hql)
+                    .setFirstResult(start)
+                    .setMaxResults(pageListNum)
+                    .list();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public List<T> list(Class clazz, int start, int pageListNum) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            return session.createQuery("from " + clazz.getName() + " ")
+                    .setFirstResult(start)
+                    .setMaxResults(pageListNum)
+                    .list();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public T uniqueResult(String hql, Object... objects) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(hql);
+            if (objects != null)
+                for (int i=0; i<objects.length; ++i)
+                    query.setParameter(i, objects[i]);
+            return (T) query.uniqueResult();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public T uniqueResultSql(String sql, Object... objects) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            SQLQuery query = session.createSQLQuery(sql);
+            if (objects != null)
+                for (int i=0; i<objects.length; ++i)
+                    query.setParameter(i, objects[i]);
+            return (T) query.uniqueResult();
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
+
+    public void template(SessionProcessor sp) {
+        Session session = SessionUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            sp.process(session);
+        } finally {
+            session.getTransaction().commit();
+        }
+    }
 }

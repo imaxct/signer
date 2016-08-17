@@ -25,21 +25,21 @@
         .foot{position:relative;top:80px;margin:15px 15px 0;font-size:12px;color:#4eb0f8}
         pre{background:#3498DB;color:#ffffff;padding:15px 20px;margin:25px -15px -15px;line-height:1.4em;font-size:14px;text-align:left;word-break:break-all;white-space:pre-wrap}
     </style>
-    <title>${msg.title}|signer@imaxct</title>
+    <title>${map.title}|signer@imaxct</title>
 </head>
 <body>
 <p class="title">Error</p>
 <div class="box">
-    <h2>${msg.title}</h2>
-    <p class="main">${msg.errmsg}</p>
+    <h2>${map.title}</h2>
+    <p class="main">${map.errmsg}</p>
     <p>Try again later.</p>
     <pre>If you have any question, contact the manager.</pre>
 </div>
 <p class="foot">Hosted By imaxct</p>
-<c:if test="${msg.redirect}">
+<c:if test="${map.redirect}">
     <script>
         window.setTimeout(function () {
-            location.href="${msg.url}";
+            location.href="${map.url}";
         }, 2000);
     </script>
 </c:if>

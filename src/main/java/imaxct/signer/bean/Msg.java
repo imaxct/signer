@@ -10,13 +10,13 @@ import java.util.Map;
  * Created by maxct on 2016/8/11.
  */
 public class Msg implements Serializable{
-    Map<String, Object> map = null;
+    public Map<String, Object> msg = null;
 
     public Msg(){
-        map = new HashMap<String, Object>();
+        msg = new HashMap<String, Object>();
     }
 
     public void put(String key, Object obj){
-        map.put(key, obj);
+        msg.put(key, obj);
     }
 }

@@ -1,5 +1,6 @@
 package imaxct.signer.misc;
 
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -7,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,9 +19,23 @@ import java.util.Set;
  */
 public class Lib {
 
+    private static final Gson gson = new Gson();
+
     private static Logger logger = Logger.getLogger(Lib.class);
 
     private static final String BASE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
+
+    public static String gsonToString(Object object){
+        return gson.toJson(object);
+    }
+
+    public static Date today(){
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        return today.getTime();
+    }
 
     public static String generatePassword(String pass){
         StringBuilder res = new StringBuilder(md5(pass));

@@ -51,13 +51,13 @@ public abstract class BaseParams implements Serializable{
         map.put("_client_version", _client_version);
         map.put("_phone_imei", _phone_imei);
         map.put("net_type", net_type);
-        //map.put("cuid", cuid);
-        //map.put("from", from);
-        //map.put("model", model);
-        //map.put("stErrorNums", stErrorNums);
-        //map.put("stMethod", stMethod);
-        //map.put("stMode", stMode);
-        //map.put("timestamp", timestamp);
+        //msg.put("cuid", cuid);
+        //msg.put("from", from);
+        //msg.put("model", model);
+        //msg.put("stErrorNums", stErrorNums);
+        //msg.put("stMethod", stMethod);
+        //msg.put("stMode", stMode);
+        //msg.put("timestamp", timestamp);
     }
 
     abstract void addParams();

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = Reference.DB_PREFIX + "_account")
 public class Account implements Serializable{
+    private int id;
     private int uid;
     private String name;
     private String cookie;
@@ -22,6 +23,15 @@ public class Account implements Serializable{
     @Id
     @Column(length = 30)
     @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(length = 30, unique = true)
     public int getUid() {
         return uid;
     }
@@ -30,6 +40,7 @@ public class Account implements Serializable{
         this.uid = uid;
     }
 
+    @Column(length = 200)
     public String getName() {
         return name;
     }
@@ -38,6 +49,7 @@ public class Account implements Serializable{
         this.name = name;
     }
 
+    @Column(length = 250)
     public String getCookie() {
         return cookie;
     }
@@ -46,6 +58,7 @@ public class Account implements Serializable{
         this.cookie = cookie;
     }
 
+    @Column(length = 50)
     public String getOpenUid() {
         return openUid;
     }
@@ -54,6 +67,8 @@ public class Account implements Serializable{
         this.openUid = openUid;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
     public User getUserId() {
         return userId;
     }

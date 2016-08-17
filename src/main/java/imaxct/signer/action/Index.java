@@ -19,7 +19,9 @@ public class Index {
     public ModelAndView Index(ModelMap map){
         if (!map.containsAttribute("user")) {
             ErrorMsg msg = new ErrorMsg("Error", "还没有登录,即将跳转到登录页面.", true, "/index.jsp");
-            return new ModelAndView("error", "msg", msg);
+            ModelAndView modelAndView = new ModelAndView("error");
+            modelAndView.addObject("map", msg.getMap());
+            return modelAndView;
         }
         return new ModelAndView("Index");
     }
