@@ -8,8 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>signer@imaxct</title>
+    <meta charset="UTF-8">
+    <meta lang="zh_CN">
+    <link rel="stylesheet" href="css/base.css">
+    <title>${user.username}|signer@imaxct</title>
 </head>
 <body>
+<h2>${user.username}</h2>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/Index.js"></script>
 </body>
 </html>

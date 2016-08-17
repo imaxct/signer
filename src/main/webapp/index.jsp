@@ -30,7 +30,7 @@
     <form id="register-form">
         <input type="text" name="username" placeholder="username" required><br>
         <input type="password" name="password" placeholder="password" required><br>
-        <input type="password" name="pass" placeholder="password again" required><br>
+        <input type="password" name="pass" placeholder="confirm password" required><br>
         <img id="code_img" src="">
         <a id="refresh-btn" href="javascript:;" onclick="refreshCode()" style="display: none">refresh</a><br>
         <input id="vcode_text" type="text" name="vcode" placeholder="v-code" required><br>

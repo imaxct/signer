@@ -29,15 +29,17 @@ section.active{
     display: block;
     border: 1px solid;
 }
+input{
+    margin-top: 2px;
+}
 nav ul{
     list-style: none;
     padding: 0;
     margin: 0;
 }
 nav li{
-    display: inline;
-    border: solid;
-    border-width: 1px 1px 0 1px;
+    display: inline-block;
+    border: 1px solid;
     font-family: inherit;
     font-size: .8em;
     margin: 0 5px 0 0;
@@ -46,9 +48,13 @@ nav li a{
     text-decoration: none;
 }
 li:hover{
-    background-color: #eee;
+    background-color: lightgray;
 }
 li.active{
+    color:white;
     padding-bottom: 1px;
-    background-color: white;
+    background-color: gray;
+}
+li.active a{
+    color:white;
 }

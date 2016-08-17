@@ -60,6 +60,30 @@ public class UserAction {
     public String register(@RequestParam String username,@RequestParam  String password,
                            @RequestParam  String pass,
                            ModelMap map, HttpServletRequest req){
+        Msg m = new Msg();
+        UserDao userDao = new UserDao();
+        User user = userDao.getUser(username);
+        if (user != null){
+            m.put("errcode", -1);
+            m.put("errmsg", "用户已存在");
+        }else if (!password.equals(pass)){
+            m.put("errcode", -1);
+            m.put("errmsg", "两次密码不一致");
+        }else {
+            user = new User();
+            user.setRole(1);
+            user.setUsername(username);
+            user.setPassword(Lib.generatePassword(password));
+            if (userDao.saveUser(user)){
+                m.put("errcode", 0);
+                m.put("errmsg", "ok");
+                map.put("user", userDao.getUser(username));
+            }else {
+                m.put("errcode", -1);
+                m.put("errmsg", "系统忙");
+            }
+        }
+        req.setAttribute("msg", Lib.gsonToString(m.msg));
         return "ajax";
     }
 
@@ -76,7 +100,7 @@ public class UserAction {
         String vcode = captchaProducer.createText();
         req.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, vcode);
         BufferedImage image = captchaProducer.createImage(vcode);
-        ServletOutputStream out = null;
+        ServletOutputStream out;
         try {
             out = rep.getOutputStream();
             ImageIO.write(image, "jpg", out);
