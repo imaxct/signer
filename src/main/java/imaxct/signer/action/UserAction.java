@@ -58,18 +58,29 @@ public class UserAction {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestParam String username,@RequestParam  String password,
-                           @RequestParam  String pass,
+                           @RequestParam  String pass, @RequestParam String vcode,
                            ModelMap map, HttpServletRequest req){
         Msg m = new Msg();
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username);
+        String v_code = (String) map.get(Constants.KAPTCHA_SESSION_KEY);
+        if (v_code == null) {
+            m.put("errcode", -1);
+            m.put("errmsg", "f**k");
+            req.setAttribute("msg", Lib.gsonToString(m.msg));
+            return "ajax";
+        }else
+            System.out.println(v_code);
         if (user != null){
             m.put("errcode", -1);
             m.put("errmsg", "用户已存在");
         }else if (!password.equals(pass)){
             m.put("errcode", -1);
             m.put("errmsg", "两次密码不一致");
-        }else {
+        }else if (!v_code.equalsIgnoreCase(vcode)){
+            m.put("errcode", -2);
+            m.put("errmsg", "验证码错误");
+        }else{
             user = new User();
             user.setRole(1);
             user.setUsername(username);
