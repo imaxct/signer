@@ -61,9 +61,9 @@ $(document).on("click", ".skip" ,function (event) {
     console.log(event);
     var e = event.currentTarget;
     var id = $(e).prop("id");
-    var skip = true;
+    var skip = false;
     if ($(e).prop("checked")){
-        skip = false;
+        skip = true;
     }
     $.getJSON("Tieba/skip?id="+id+"&skip="+skip, function (res) {
         if (!res){return;}
