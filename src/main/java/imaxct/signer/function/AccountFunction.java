@@ -21,37 +21,40 @@ public class AccountFunction {
     private static Logger logger = Logger.getLogger(AccountFunction.class);
 
     public Account getAccountInfo(Account account){
-        Account newAccount = account;
+        if (account==null)
+            return null;
         InputStream inputStream = Lib.getStream("http://tieba.baidu.com/f/user/json_userinfo",
-                "BDUSS=" + newAccount.getCookie(), Reference.USERAGENT_WEB, 0, null);
+                "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
         String res = Lib.streamToString(inputStream);
+        String url_name;
         if (res!=null){
             JSONObject object = JSONObject.fromObject(res);
             if (object.getInt("no")==0){
                 JSONObject data = object.getJSONObject("data");
-                newAccount.setName(data.getString("user_name_show"));
-                newAccount.setOpenUid(data.getString("open_uid"));
+                account.setName(data.getString("user_name_show"));
+                account.setOpenUid(data.getString("open_uid"));
+                url_name = data.getString("user_name_url");
             }else{
                 logger.error("fetch Json_userinfo error, err:" + object.getString("err"));
                 return null;
             }
         }else
             return null;
-        inputStream = Lib.getStream("http://tieba.baidu.com/home/get/panel?ie=utf-8&un=" + Lib.urlEncode(newAccount.getName()),
-                null, Reference.USERAGENT_WEB, 0, null);
+        inputStream = Lib.getStream("http://tieba.baidu.com/home/get/panel?ie=utf-8&un=" + url_name,
+                "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
         res = Lib.streamToString(inputStream);
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
             if (object.getInt("no")==0){
                 int tid = object.getJSONObject("data").getInt("id");
-                newAccount.setUid(tid);
+                account.setUid(tid);
             }else{
                 logger.error("get user info error, " + object.getString("error"));
                 return null;
             }
         }else
             return null;
-        return newAccount;
+        return account;
     }
 
     public List<Tieba> getLikedTieba(Account account){

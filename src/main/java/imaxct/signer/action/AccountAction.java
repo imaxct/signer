@@ -8,6 +8,7 @@ import imaxct.signer.domain.Tieba;
 import imaxct.signer.domain.User;
 import imaxct.signer.function.AccountFunction;
 import imaxct.signer.misc.Lib;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,8 @@ import java.util.List;
 @RequestMapping("/Account")
 @SessionAttributes({"user"})
 public class AccountAction {
+
+    private static final Logger logger = Logger.getLogger(AccountAction.class);
 
     @RequestMapping(value = "/bind", method = RequestMethod.POST)
     public String bindAccount(@RequestParam String bduss, ModelMap session, HttpServletRequest req){
