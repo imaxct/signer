@@ -31,13 +31,13 @@ public class TiebaDao extends BaseDao<Tieba> {
         return this.update(t);
     }
 
-    public boolean setSkip(Tieba tieba) {
+    public boolean setSkip(Tieba tieba, boolean flag) {
         if (tieba == null)
             return false;
         Tieba t = getTieba(tieba.getId());
         if (t == null)
             return false;
-        t.setSkip(true);
+        t.setSkip(flag);
         return this.update(t);
     }
 

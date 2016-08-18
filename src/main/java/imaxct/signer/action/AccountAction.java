@@ -88,6 +88,9 @@ public class AccountAction {
                 m.put("errcode", 0);
                 m.put("errmsg", "ok");
                 m.put("total", (list==null||list.isEmpty())?0:list.size());
+                if (list!=null && !list.isEmpty())
+                    for (Tieba tieba : list)
+                        tieba.setAccount(null);
                 m.put("list", list);
             }
             req.setAttribute("msg", Lib.gsonToString(m.msg));

@@ -10,18 +10,21 @@ $("li").on("click", function (event) {
     $($(e).find("a").attr("href")).addClass("active");
 });
 $("#log").on("click", function (event) {
-    event.preventDefault();
+    $("#log").prop("disabled", true).val("正在登陆");
     var params = $("#login-form").serialize();
     $.ajax({url:"User/login", type:"post", data:params, dataType:"json", success:function (res) {
         if (!res){return;}
         if (res.errcode==0){
             window.location.href="Index";
-        }else
+        }else{
             alert(res.errmsg);
+            $("#log").prop("disabled", false).val("submit");
+        }
+
     }});
 });
 $("#reg").on("click", function (event) {
-    event.preventDefault();
+    $("#reg").prop("disabled", true).val("正在注册");
     var params = $("#register-form").serialize();
     $.ajax({url:"User/register", type:"post", data:params, dataType:"json", success:function (res) {
         if (!res){return;}
@@ -30,8 +33,11 @@ $("#reg").on("click", function (event) {
         }if (res.errcode==-2){
             refreshCode();
             alert(res.errmsg);
-        }else
+            $("#reg").prop("disabled", false).val("submit");
+        }else{
+            $("#reg").prop("disabled", false).val("submit");
             alert(res.errmsg);
+        }
     }});
 });
 function refreshCode() {
