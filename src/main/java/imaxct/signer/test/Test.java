@@ -1,7 +1,5 @@
 package imaxct.signer.test;
 
-import imaxct.signer.misc.Lib;
-
 /**
  * Test Class
  * Created by maxct on 2016/8/11.
@@ -32,6 +30,6 @@ public class Test {
 //        userDao.saveUser(user);
 //        User a = userDao.getUser("admin");
 //        System.out.println(a.toString());
-        System.out.print(Lib.today());
+//        System.out.print(Lib.today());
     }
 }

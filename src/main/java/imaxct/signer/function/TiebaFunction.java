@@ -27,7 +27,6 @@ public class TiebaFunction {
         String res = Lib.streamToString(inputStream);
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
-            System.out.println(res);
             return object.getInt("error_code");
         }else{
             logger.error("sign error, returned string is null");
