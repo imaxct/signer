@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>${user.username}</h2>
-<a href="#" style="float: right">退出</a>
+<a href="#" style="float: right" onclick="logout()">退出</a>
 <div class="word">绑定的Tieba账号</div>
 <div class="line"></div>
 <c:choose>

@@ -129,4 +129,10 @@ public class UserAction {
         }
         return null;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap session){
+        session.remove("user");
+        return null;
+    }
 }

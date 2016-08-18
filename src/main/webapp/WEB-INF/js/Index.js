@@ -72,3 +72,8 @@ $(document).on("click", ".skip" ,function (event) {
         else alert(res.errmsg);
     });
 });
+function logout() {
+    $.get("User/logout", function () {
+        window.location.href="index.jsp";
+    });
+}
