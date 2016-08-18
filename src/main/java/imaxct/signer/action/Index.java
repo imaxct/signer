@@ -2,7 +2,6 @@ package imaxct.signer.action;
 
 import imaxct.signer.bean.ErrorMsg;
 import imaxct.signer.dao.AccountDao;
-import imaxct.signer.dao.UserDao;
 import imaxct.signer.domain.Account;
 import imaxct.signer.domain.User;
 import org.springframework.stereotype.Controller;
@@ -31,7 +30,6 @@ public class Index {
         }
         ModelAndView modelAndView = new ModelAndView("Index");
         User user = (User) map.get("user");
-        UserDao userDao = new UserDao();
         AccountDao accountDao = new AccountDao();
         List<Account> accounts = accountDao.getAccounts(user);
         if (accounts != null){
