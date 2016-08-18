@@ -55,7 +55,7 @@ public class Tieba implements Serializable{
         return name;
     }
 
-    @Column(length = 20)
+    @Column(columnDefinition = "int(20) default -1")
     public int getErrcode() {
         return errcode;
     }
