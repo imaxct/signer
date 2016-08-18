@@ -32,6 +32,11 @@ public class SignTask {
                 t.setLastSign(Lib.today());
                 t.setErrcode(code);
                 tiebaDao.update(t);
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
