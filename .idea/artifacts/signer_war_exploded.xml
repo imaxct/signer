@@ -26,7 +26,7 @@
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.15.0-GA" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-c3p0:4.2.3.Final" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.2.1" />
-          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.3.4" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.12" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" />

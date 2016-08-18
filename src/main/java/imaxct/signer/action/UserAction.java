@@ -37,6 +37,8 @@ public class UserAction {
                         ModelMap map, HttpServletRequest req){
         Msg m = new Msg();
         UserDao userDao = new UserDao();
+        username = username.trim();
+        password = password.trim();
         User user = userDao.getUser(username);
         if (user != null){
             if (user.getPassword().equals(Lib.generatePassword(password))){
@@ -60,6 +62,10 @@ public class UserAction {
     public String register(@RequestParam String username,@RequestParam  String password,
                            @RequestParam  String pass, @RequestParam String vcode,
                            ModelMap map, HttpServletRequest req){
+        username = username.trim();
+        password =  password.trim();
+        pass = pass.trim();
+        vcode = vcode.trim();
         Msg m = new Msg();
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username);

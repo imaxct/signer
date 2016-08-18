@@ -18,6 +18,8 @@ public class Account implements Serializable{
     private String cookie;
     private String openUid;
     private User userId;
+    private int tiebaTotal = 0;
+    private int signedTotal = 0;
     public Account(){}
 
     @Id
@@ -68,12 +70,35 @@ public class Account implements Serializable{
     }
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userid")
     public User getUserId() {
         return userId;
     }
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    @Column(length = 30)
+    public int getTiebaTotal() {
+        return tiebaTotal;
+    }
+
+    public void setTiebaTotal(int tiebaTotal) {
+        this.tiebaTotal = tiebaTotal;
+    }
+
+    @Column(length = 30)
+    public int getSignedTotal() {
+        return signedTotal;
+    }
+
+    public void setSignedTotal(int signedTotal) {
+        this.signedTotal = signedTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "Account[id="+id+", name="+name+", uid="+uid+"]";
     }
 }

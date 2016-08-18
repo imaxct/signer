@@ -49,8 +49,21 @@ public class BaseDao<T> {
             t.commit();
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             session.getTransaction().rollback();
             return false;
+        }
+    }
+
+    public void merge(T obj){
+        Session session = SessionUtil.getSession();
+        try{
+            Transaction t = session.beginTransaction();
+            session.merge(obj);
+            t.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
         }
     }
 

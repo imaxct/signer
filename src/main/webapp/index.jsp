@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>signer@imaxct</title>
@@ -37,6 +38,11 @@
         <input type="submit" id="reg" value="submit">
     </form>
 </section>
+<c:if test="${!empty user}">
+    <script>
+        window.location.href="Index";
+    </script>
+</c:if>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/signer.js"></script>
 </body>
