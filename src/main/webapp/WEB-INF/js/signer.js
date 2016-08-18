@@ -34,10 +34,6 @@ $("#reg").on("click", function (event) {
             alert(res.errmsg);
     }});
 });
-$("#vcode_text").focus(function () {
-   refreshCode();
-    $("#refresh-btn").show();
-});
 function refreshCode() {
     $("#code_img").attr("src", "User/vcode?r=" + Math.random())
 }

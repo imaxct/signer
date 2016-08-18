@@ -32,8 +32,8 @@
         <input type="text" name="username" placeholder="username" required><br>
         <input type="password" name="password" placeholder="password" required><br>
         <input type="password" name="pass" placeholder="confirm password" required><br>
-        <img id="code_img" src="">
-        <a id="refresh-btn" href="javascript:;" onclick="refreshCode()" style="display: none">refresh</a><br>
+        <img id="code_img" src="User/vcode">
+        <a id="refresh-btn" href="javascript:;" onclick="refreshCode()">refresh</a><br>
         <input id="vcode_text" type="text" name="vcode" placeholder="v-code" required><br>
         <input type="submit" id="reg" value="submit">
     </form>

@@ -76,7 +76,7 @@ public class UserAction {
             req.setAttribute("msg", Lib.gsonToString(m.msg));
             return "ajax";
         }else
-            System.out.println(v_code);
+            logger.error(v_code);
         if (user != null){
             m.put("errcode", -1);
             m.put("errmsg", "用户已存在");

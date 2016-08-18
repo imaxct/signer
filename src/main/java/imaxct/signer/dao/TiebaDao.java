@@ -46,6 +46,6 @@ public class TiebaDao extends BaseDao<Tieba> {
     }
 
     public List<Tieba> getUnsignedTieba(Date date) {
-        return this.listHql("from Tieba t where (t.lastSign<? or t.lastSign=null) and (t.errcode=160003 or t.errcode=160008) and t.skip=false", date);
+        return this.listHql("from Tieba t where (t.lastSign<? or t.lastSign=null or t.errcode=160003 or t.errcode=160008) and t.skip=false", date);
     }
 }

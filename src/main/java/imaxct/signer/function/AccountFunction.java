@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,14 @@ public class AccountFunction {
             return null;
         InputStream inputStream = Lib.getStream("http://tieba.baidu.com/f/user/json_userinfo",
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
-        String res = Lib.streamToString(inputStream);
+        String res;
+        try {
+            res = new String(Lib.streamToString(inputStream).getBytes(), "GBK");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            logger.error("encoding change failed");
+            return null;
+        }
         String url_name;
         if (res!=null){
             JSONObject object = JSONObject.fromObject(res);
