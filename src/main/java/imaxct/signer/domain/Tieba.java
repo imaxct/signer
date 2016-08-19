@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = Reference.DB_PREFIX + "_tieba")
-public class Tieba implements Serializable{
+public class Tieba implements Serializable {
     private int id;
     private int fid;
     private String name;
@@ -21,7 +21,8 @@ public class Tieba implements Serializable{
     private int errcode;
     private boolean skip = false;
 
-    public Tieba() {}
+    public Tieba() {
+    }
 
     @Id
     @Column(length = 30)
@@ -86,5 +87,10 @@ public class Tieba implements Serializable{
 
     public void setLastSign(Date lastSign) {
         this.lastSign = lastSign;
+    }
+
+    @Override
+    public String toString() {
+        return "Tieba[name=" + name + ", lastSign=" + lastSign + ", errcode=" + errcode + "]";
     }
 }

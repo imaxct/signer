@@ -29,6 +29,10 @@ public class Lib {
         return gson.toJson(object);
     }
 
+    public static boolean haveToBeEncoded(String s){
+        return s.matches(".*[+/?%#&= ].*");
+    }
+
     public static Date today(){
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, 0);
@@ -148,8 +152,8 @@ public class Lib {
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setConnectTimeout(timeout);
             httpURLConnection.setDoOutput(true);
-            OutputStream os = httpURLConnection.getOutputStream();
-            os.write(params.getBytes());
+            OutputStreamWriter os = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
+            os.write(params);
             os.flush();
             os.close();
             int responseCode = httpURLConnection.getResponseCode();

@@ -18,7 +18,6 @@ public class TiebaFunction {
     private static Logger logger = Logger.getLogger(TiebaFunction.class);
 
     public int sign(Tieba tieba){
-
         String tbs = getTbs(tieba.getAccount());
         SignParams params = new SignParams(tieba.getAccount().getCookie(), tbs,
                 tieba.getFid(), tieba.getName());
