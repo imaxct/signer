@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -131,8 +132,9 @@ public class UserAction {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap session){
+    public String logout(ModelMap session, HttpSession httpSession){
         session.remove("user");
+        httpSession.removeAttribute("user");
         return "ajax";
     }
 }

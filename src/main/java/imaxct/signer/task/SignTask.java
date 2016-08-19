@@ -21,8 +21,7 @@ public class SignTask {
 
     @Scheduled(cron = "0 0/10 1-23 * * ?")
     public void run(){
-        logger.debug("sign task run!");
-        System.out.println("sign task run!");
+        logger.error("sign task run!");
         TiebaDao tiebaDao = new TiebaDao();
         TiebaFunction function = new TiebaFunction();
         List<Tieba> list = tiebaDao.getUnsignedTieba(Lib.today());
@@ -31,9 +30,9 @@ public class SignTask {
                 int code = function.sign(t);
                 t.setLastSign(Lib.today());
                 t.setErrcode(code);
-                tiebaDao.update(t);
+                tiebaDao.merge(t);
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

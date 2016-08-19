@@ -101,4 +101,64 @@ public class AccountAction {
         req.setAttribute("msg", Lib.gsonToString(m.msg));
         return "ajax";
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String updateTieba(@RequestParam int id, ModelMap session, HttpServletRequest req){
+        Msg m = new Msg();
+        if (session.containsAttribute("user")){
+            User user = (User) session.get("user");
+            AccountDao accountDao = new AccountDao();
+            Account account = accountDao.getAccount(id);
+            if (user != null && account != null && account.getUserId().getId() == user.getId()){
+                AccountFunction function = new AccountFunction();
+                TiebaDao tiebaDao = new TiebaDao();
+                List<Tieba>tiebaList = tiebaDao.getOnesTieba(account);
+                List<Tieba>newList = function.getLikedTieba(account);
+                int add = 0, minus = 0;
+                if (tiebaList != null && newList != null){
+                    for (Tieba tieba : newList){
+                        if (!tiebaList.contains(tieba)){
+                            tiebaDao.create(tieba);
+                            add++;
+                        }
+                    }
+                    for (Tieba tieba : tiebaList){
+                        if (!newList.contains(tieba)){
+                            tiebaDao.delete(tieba);
+                            minus++;
+                        }
+                    }
+                    m.put("errcode", 0);
+                    m.put("errmsg", "ok");
+                    m.put("add", add);
+                    m.put("minus", minus);
+                }else if (tiebaList == null && newList != null){
+                    for (Tieba tieba : newList){
+                        tiebaDao.create(tieba);
+                        add++;
+                    }
+                    m.put("errcode", 0);
+                    m.put("errmsg", "ok");
+                    m.put("add", add);
+                    m.put("minus", minus);
+                }else if (tiebaList != null){
+                    m.put("errcode", -1);
+                    m.put("errmsg", "可能出错了");
+                }else{
+                    m.put("errcode", 0);
+                    m.put("errmsg", "ok");
+                    m.put("add", add);
+                    m.put("minus", minus);
+                }
+            }else{
+                m.put("errcode", -1);
+                m.put("errmsg", "Access Denied");
+            }
+        }else{
+            m.put("errcode", -1);
+            m.put("errmsg", "Access Denied");
+        }
+        req.setAttribute("msg", Lib.gsonToString(m.msg));
+        return "ajax";
+    }
 }

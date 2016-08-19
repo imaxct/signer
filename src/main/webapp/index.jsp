@@ -13,6 +13,7 @@
     <link type="text/css" rel="stylesheet" href="css/base.css">
 </head>
 <body>
+<div class="main">
 <h2>signer@imaxct</h2>
 <nav>
     <ul>
@@ -45,5 +46,6 @@
 </c:if>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/signer.js"></script>
+</div>
 </body>
 </html>

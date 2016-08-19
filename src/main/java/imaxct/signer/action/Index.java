@@ -32,13 +32,6 @@ public class Index {
         User user = (User) map.get("user");
         AccountDao accountDao = new AccountDao();
         List<Account> accounts = accountDao.getAccounts(user);
-        if (accounts != null){
-            for (Account account : accounts){
-                int tot = accountDao.countSigned(account);
-                account.setSignedTotal(tot);
-                accountDao.update(account);
-            }
-        }
         modelAndView.addObject("accounts", accounts);
         return modelAndView;
     }

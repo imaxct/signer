@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = Reference.DB_PREFIX + "_account")
-public class Account implements Serializable{
+public class Account implements Serializable {
     private int id;
     private int uid;
     private String name;
@@ -19,8 +19,9 @@ public class Account implements Serializable{
     private String openUid;
     private User userId;
     private int tiebaTotal = 0;
-    private int signedTotal = 0;
-    public Account(){}
+
+    public Account() {
+    }
 
     @Id
     @Column(length = 30)
@@ -88,17 +89,8 @@ public class Account implements Serializable{
         this.tiebaTotal = tiebaTotal;
     }
 
-    @Column(length = 30)
-    public int getSignedTotal() {
-        return signedTotal;
-    }
-
-    public void setSignedTotal(int signedTotal) {
-        this.signedTotal = signedTotal;
-    }
-
     @Override
     public String toString() {
-        return "Account[id="+id+", name="+name+", uid="+uid+"]";
+        return "Account[id=" + id + ", name=" + name + ", uid=" + uid + "]";
     }
 }

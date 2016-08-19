@@ -23,7 +23,7 @@
                 <th>账号ID</th>
                 <th>Uid</th>
                 <th>贴吧数</th>
-                <th>已签到</th>
+                <th>更新</th>
             </tr>
             </thead>
             <tbody id="account-list">
@@ -32,7 +32,7 @@
                     <td><a class="show-tieba-detail" href="#" id="${account.id}">${account.name}</a></td>
                     <td>${account.uid}</td>
                     <td>${account.tiebaTotal}</td>
-                    <td>${account.signedTotal}</td>
+                    <td><a id="${account.id}" class="update-liked-tieba" href="javascript:;">更新喜欢的吧</a></td>
                 </tr>
             </c:forEach>
             </tbody>

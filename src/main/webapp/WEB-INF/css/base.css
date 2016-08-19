@@ -99,6 +99,23 @@ td.succ{
 td.error{
     color: red;
 }
-.skip{
-
+.cover {
+    animation: showfwin 1s;
+    -webkit-animation: showfwin 1s;
+    -moz-animation: showfwin 1s;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.alert{
+    font-size: 2em;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 50%;
+    z-index: 20;
 }
