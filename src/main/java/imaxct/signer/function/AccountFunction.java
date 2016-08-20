@@ -28,7 +28,8 @@ public class AccountFunction {
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
         String res;
         try {
-            res = new String(Lib.streamToString(inputStream).getBytes(), "GBK");
+            res = new String(Lib.streamToString(inputStream, "gb2312").getBytes("gb2312"), "gb2312");
+            res = new String(res.getBytes("utf-8"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             logger.error("encoding change failed");
@@ -50,7 +51,7 @@ public class AccountFunction {
             return null;
         inputStream = Lib.getStream("http://tieba.baidu.com/home/get/panel?ie=utf-8&un=" + url_name,
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
-        res = Lib.streamToString(inputStream);
+        res = Lib.streamToString(inputStream, "utf-8");
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
             if (object.getInt("no")==0){
@@ -69,7 +70,7 @@ public class AccountFunction {
         List<Tieba>list = new ArrayList<>();
         InputStream inputStream = Lib.getStream("http://tieba.baidu.com/p/getLikeForum?uid=" + account.getUid(),
                 "BDUSS=" + account.getCookie(), Reference.USERAGENT_WEB, 0, null);
-        String res = Lib.streamToString(inputStream);
+        String res = Lib.streamToString(inputStream, "utf-8");
         if (res!=null){
             JSONObject object = JSONObject.fromObject(res);
             if (object.getInt("errno") == 0){

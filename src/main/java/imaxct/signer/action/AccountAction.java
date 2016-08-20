@@ -102,6 +102,34 @@ public class AccountAction {
         return "ajax";
     }
 
+    @RequestMapping(value = "/unbind", method = RequestMethod.GET)
+    public String unbind(@RequestParam int id, ModelMap session, HttpServletRequest req){
+        Msg m = new Msg();
+        if (session.containsAttribute("user")){
+            AccountDao accountDao = new AccountDao();
+            Account account = accountDao.getAccount(id);
+            User user = (User) session.get("user");
+            if (user != null && account != null && account.getUserId().getId() == user.getId()){
+                TiebaDao tiebaDao = new TiebaDao();
+                if (tiebaDao.deleteOnesTieba(account) && accountDao.deleteAccount(account)){
+                    m.put("errcode", 0);
+                    m.put("errmsg", "ok");
+                }else{
+                    m.put("errcode", -1);
+                    m.put("errmsg", "删除失败");
+                }
+            }else{
+                m.put("errcode", -1);
+                m.put("errmsg", "没有权限");
+            }
+        }else{
+            m.put("errcode", -1);
+            m.put("errmsg", "Access Denied");
+        }
+        req.setAttribute("msg", Lib.gsonToString(m.msg));
+        return "ajax";
+    }
+
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateTieba(@RequestParam int id, ModelMap session, HttpServletRequest req){
         Msg m = new Msg();

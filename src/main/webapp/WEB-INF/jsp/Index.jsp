@@ -24,6 +24,7 @@
                 <th>Uid</th>
                 <th>贴吧数</th>
                 <th>更新</th>
+                <th>取消绑定</th>
             </tr>
             </thead>
             <tbody id="account-list">
@@ -33,6 +34,7 @@
                     <td>${account.uid}</td>
                     <td>${account.tiebaTotal}</td>
                     <td><a id="${account.id}" class="update-liked-tieba" href="javascript:;">更新喜欢的吧</a></td>
+                    <td><a id="${account.id}" class="unbind-account" href="javascript:;">解绑</a></td>
                 </tr>
             </c:forEach>
             </tbody>

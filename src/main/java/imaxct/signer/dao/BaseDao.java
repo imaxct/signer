@@ -1,6 +1,7 @@
 package imaxct.signer.dao;
 
 import imaxct.signer.misc.SessionUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -14,6 +15,25 @@ import java.util.List;
  * Created by maxct on 2016/8/16.
  */
 public class BaseDao<T> {
+    private static final Logger logger = Logger.getLogger(BaseDao.class);
+
+    public boolean update(String hql, Object... objects){
+        Session session = SessionUtil.getSession();
+        try{
+            Transaction t = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            if (objects != null && objects.length > 0)
+                for (int i=0; i<objects.length; ++i)
+                    query.setParameter(i, objects[i]);
+            int tot = query.executeUpdate();
+            t.commit();
+            return tot > 0;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            session.getTransaction().rollback();
+            return false;
+        }
+    }
 
     public boolean create(T obj){
         Session session = SessionUtil.getSession();

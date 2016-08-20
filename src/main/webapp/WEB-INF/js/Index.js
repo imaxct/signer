@@ -14,6 +14,18 @@ var errMsg = new Proxy({
         return target.hasOwnProperty(key)?target[key]:"未知错误";
     }
 });
+$(document).on("click", ".unbind-account", function (event) {
+    var e = event.currentTarget;
+    var id = $(e).prop("id");
+    $.getJSON("Account/unbind?id=" + id, function (res) {
+        if (!res)return;
+        if (res.errcode == 0){
+            window.location.reload();
+        }else{
+            alert(res.errmsg);
+        }
+    })
+});
 $(document).on("click", ".update-liked-tieba", function (event) {
     var e = event.currentTarget;
     var id = $(e).prop("id");

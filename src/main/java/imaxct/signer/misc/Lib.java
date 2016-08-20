@@ -87,12 +87,18 @@ public class Lib {
         }
     }
 
-    public static String streamToString(InputStream stream){
+    public static String streamToString(InputStream stream, String encoding){
         if (stream == null)
             return null;
         StringBuilder res = new StringBuilder();
         String buff;
-        BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(stream, encoding));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
         try{
             while ((buff=in.readLine()) != null)
                 res.append(buff);

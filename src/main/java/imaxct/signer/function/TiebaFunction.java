@@ -23,7 +23,7 @@ public class TiebaFunction {
                 tieba.getFid(), tieba.getName());
         InputStream inputStream = Lib.postStream("http://c.tieba.baidu.com/c/c/forum/sign",
                 params.toString(), "BDUSS=" + tieba.getAccount().getCookie(), Reference.USERAGENT_CLIENT, 0, null);
-        String res = Lib.streamToString(inputStream);
+        String res = Lib.streamToString(inputStream, "utf-8");
         if (res != null){
             JSONObject object = JSONObject.fromObject(res);
             return object.getInt("error_code");
@@ -36,7 +36,7 @@ public class TiebaFunction {
     public String getTbs(Account account){
         InputStream inputStream = Lib.getStream("http://tieba.baidu.com/dc/common/tbs",
                 "BDUSS="+account.getCookie(), Reference.USERAGENT_WEB, 0, null);
-        String res = Lib.streamToString(inputStream);
+        String res = Lib.streamToString(inputStream, "utf-8");
         if (res != null){
             JSONObject jsonObject = JSONObject.fromObject(res);
             return jsonObject.getString("tbs");
