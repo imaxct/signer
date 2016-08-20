@@ -90,6 +90,14 @@ public class Tieba implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        Tieba tieba = (Tieba) obj;
+        return tieba.getFid()==fid;
+    }
+
+    @Override
     public String toString() {
         return "Tieba[name=" + name + ", lastSign=" + lastSign + ", errcode=" + errcode + "]";
     }
