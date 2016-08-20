@@ -52,7 +52,7 @@ public abstract class BaseParams implements Serializable{
         Set<String>keySet = map.keySet();
         for (String key : keySet) {
             String v = map.get(key);
-            v = Lib.haveToBeEncoded(v)?Lib.urlEncode(v):v;
+            v = key.equals("kw")?Lib.urlEncode(v):v;
             s.append(key).append('=').append(v).append('&');
         }
         return s.toString().substring(0, s.length()-1);
