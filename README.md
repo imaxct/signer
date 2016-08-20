@@ -1,5 +1,7 @@
 # signer
     A Java Tieba signer
+    
+- ps:部署时需修改```hibernate.cfg.xml```和```pom.xml```中的数据库与远程tomcat账户名和密码
 ## 遇到的问题
 - 2016-08-17 jsp页面中EL表达式无法正确显示, 解决方法:去掉web.xml中的```DOCTYPE```标签
 
