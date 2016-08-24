@@ -19,7 +19,7 @@ public class SignTask {
 
     private static final Logger logger = Logger.getLogger(SignTask.class);
 
-    @Scheduled(cron = "0 */10 1-23 * * *")
+    @Scheduled(cron = "0 0/10 1-23 * * ?")
     public void run(){
         logger.error("sign task run!");
         TiebaDao tiebaDao = new TiebaDao();
