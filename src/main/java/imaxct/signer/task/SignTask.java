@@ -5,8 +5,9 @@ import imaxct.signer.domain.Tieba;
 import imaxct.signer.function.TiebaFunction;
 import imaxct.signer.misc.Lib;
 import org.apache.log4j.Logger;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.util.List;
 
@@ -14,12 +15,10 @@ import java.util.List;
  * Sign Cron task
  * Created by maxct on 2016/8/17.
  */
-@Component
-public class SignTask {
+public class SignTask extends QuartzJobBean{
 
     private static final Logger logger = Logger.getLogger(SignTask.class);
 
-    @Scheduled(cron = "0 0/10 1-23 * * ?")
     public void run(){
         logger.error("sign task run!");
         TiebaDao tiebaDao = new TiebaDao();
@@ -38,5 +37,10 @@ public class SignTask {
                 }
             }
         }
+    }
+
+    @Override
+    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        this.run();
     }
 }

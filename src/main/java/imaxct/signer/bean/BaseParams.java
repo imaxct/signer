@@ -31,7 +31,7 @@ public abstract class BaseParams implements Serializable{
         Set<String> keySet = map.keySet();
         StringBuilder SIGN = new StringBuilder();
         for (String key : keySet)
-            SIGN.append(key + '=' + map.get(key));
+            SIGN.append(key).append('=').append(map.get(key));
         SIGN.append("tiebaclient!!!");
         map.put("sign", Lib.md5(SIGN.toString()).toUpperCase());
     }
